@@ -55,10 +55,10 @@ import OrbitControls from "orbit-controls-es6";
 
 export default {
   mounted() {
-    const dat = require("dat.gui");
+    //const dat = require("dat.gui");
     // Find the latest version by visiting https://unpkg.com/three.
 
-    const gui = new dat.GUI();
+    // const gui = new dat.GUI();
     const world = {
       plane: {
         width: 100,
@@ -67,13 +67,13 @@ export default {
         heightSegments: 100
       }
     };
-    // SLIDER CONTROLS
+    /* SLIDER CONTROLS
 
     gui.add(world.plane, "width", 1, 25).onChange(generatePlane);
 
     gui.add(world.plane, "height", 1, 25).onChange(generatePlane);
     gui.add(world.plane, "widthSegments", 1, 100).onChange(generatePlane);
-    gui.add(world.plane, "heightSegments", 1, 100).onChange(generatePlane);
+    gui.add(world.plane, "heightSegments", 1, 100).onChange(generatePlane); */
 
     function generatePlane() {
       planeMesh.geometry.dispose();
