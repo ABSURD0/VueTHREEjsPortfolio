@@ -3,30 +3,15 @@
     <canvas ref="canvas"></canvas>
     <div
       id="container"
-      class="absolute text-white text-center w-full max-w-2xl px-6"
-      style="top: 50%; transform: translate(-50%, -50%); left: 50%;"
+      style=" position: absolute; color: aliceblue; top: 50%;  left: 50%;  transform: translate(-50%, -50%); height: 25%; width: 90%; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; font-size: 4rem; font-family: Raleway;"
     >
-      <h1
-        id="h1Name"
-        class="font-arvo text-4xl tracking-wide opacity-0"
-        style="transform: translateY(30px)"
-      >
-        Erik Truckner
-      </h1>
-      <p
-        id="pText"
-        class="font-arvo text-5xl mt-8 tracking-wide opacity-0"
-        style="transform: translateY(30px)"
-      >
-        SEE YOU, SPACE COWBOY...
-      </p>
       <a
         id="animationButton"
         href="#"
-        class="font-arvo mt-8 border px-4 py-2 rounded-lg hover:bg-white hover:text-black inline-block opacity-0"
-        style="transform: translateY(30px)"
+        style="border: 4px solid white; font-size: 20px; width: 80%; padding: 2rem; text-align: center; font-size: 2rem; box-shadow: 0px 10px 20px 5px rgb(213, 252, 251);"
       >
-        CHECK IT OUT
+        Continue to Erik's Portfolio
       </a>
     </div>
   </div>
@@ -51,6 +36,7 @@ import {
   Float32BufferAttribute,
   Points
 } from "three";
+
 import OrbitControls from "orbit-controls-es6";
 
 export default {
@@ -181,13 +167,15 @@ export default {
     backLight.position.set(0, -1, -1);
     scene.add(backLight);
 
+    //STARS
+
     const starGeometry = new BufferGeometry();
     const starMaterial = new PointsMaterial({
       color: 0xffffff
     });
 
     const starVerticies = [];
-    for (let i = 0; i < 10000; i++) {
+    for (let i = 0; i < 130000; i++) {
       const x = (Math.random() - 0.5) * 2000;
       const y = (Math.random() - 0.5) * 2000;
       const z = (Math.random() - 0.5) * 2000;
@@ -347,7 +335,7 @@ export default {
         duration: 3,
         delay: 2.5,
         onComplete: () => {
-          this.$router.push("/work");
+          this.$router.push("/http://10.0.0.26:8080/");
         }
       });
     });
