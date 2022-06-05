@@ -3,15 +3,30 @@
     <canvas ref="canvas"></canvas>
     <div
       id="container"
-      style=" position: absolute; color: aliceblue; top: 50%;  left: 50%;  transform: translate(-50%, -50%); height: 25%; width: 90%; display: flex; flex-direction: column;
-      justify-content: center; align-items: center; font-size: 4rem; font-family: Raleway;"
+      class="absolute text-white text-center w-full max-w-2xl px-6"
+      style="top: 50%; transform: translate(-50%, -50%); left: 50%"
     >
+      <h1
+        id="h1Name"
+        class="font-arvo text-4xl tracking-wide opacity-0"
+        style="transform: translateY(30px)"
+      >
+        Erik Truckner
+      </h1>
+      <p
+        id="pText"
+        class="font-arvo text-5xl mt-8 tracking-wide opacity-0"
+        style="transform: translateY(30px)"
+      >
+        SEE YOU, SPACE COWBOY...
+      </p>
       <a
         id="animationButton"
         href="#"
-        style="border: 4px solid white; font-size: 20px; width: 80%; padding: 2rem; text-align: center; font-size: 2rem; box-shadow: 0px 10px 20px 5px rgb(213, 252, 251);"
+        class="font-arvo mt-8 border px-4 py-2 rounded-lg hover:bg-white hover:text-black inline-block opacity-0"
+        style="transform: translateY(30px)"
       >
-        Continue to Erik's Portfolio
+        CHECK IT OUT
       </a>
     </div>
   </div>
@@ -34,9 +49,8 @@ import {
   BufferGeometry,
   PointsMaterial,
   Float32BufferAttribute,
-  Points
+  Points,
 } from "three";
-
 import OrbitControls from "orbit-controls-es6";
 
 export default {
@@ -50,8 +64,8 @@ export default {
         width: 100,
         height: 100,
         widthSegments: 100,
-        heightSegments: 100
-      }
+        heightSegments: 100,
+      },
     };
     /* SLIDER CONTROLS
 
@@ -110,7 +124,7 @@ export default {
       1000
     );
     const renderer = new WebGLRenderer({
-      canvas: this.$refs.canvas
+      canvas: this.$refs.canvas,
     });
 
     renderer.setSize(innerWidth, innerHeight);
@@ -128,7 +142,7 @@ export default {
     const planeMaterial = new MeshPhongMaterial({
       side: DoubleSide,
       flatShading: FlatShading,
-      vertexColors: true
+      vertexColors: true,
     });
     const planeMesh = new Mesh(planeGeometry, planeMaterial);
     scene.add(planeMesh);
@@ -167,15 +181,13 @@ export default {
     backLight.position.set(0, -1, -1);
     scene.add(backLight);
 
-    //STARS
-
     const starGeometry = new BufferGeometry();
     const starMaterial = new PointsMaterial({
-      color: 0xffffff
+      color: 0xffffff,
     });
 
     const starVerticies = [];
-    for (let i = 0; i < 130000; i++) {
+    for (let i = 0; i < 100000; i++) {
       const x = (Math.random() - 0.5) * 2000;
       const y = (Math.random() - 0.5) * 2000;
       const z = (Math.random() - 0.5) * 2000;
@@ -192,7 +204,7 @@ export default {
 
     const mouse = {
       x: undefined,
-      y: undefined
+      y: undefined,
     };
 
     let frame = 0;
@@ -205,7 +217,7 @@ export default {
       const {
         array,
         originalPosition,
-        randomValues
+        randomValues,
       } = planeMesh.geometry.attributes.position;
       for (let i = 0; i < array.length; i += 3) {
         // X COORDINATE
@@ -248,13 +260,13 @@ export default {
         const initialColor = {
           r: 0.05,
           g: 0.22,
-          b: 0.99
+          b: 0.99,
         };
 
         const hoverColor = {
           r: 0.3,
           g: 0.6,
-          b: 1
+          b: 1,
         };
 
         gsap.to(hoverColor, {
@@ -278,7 +290,7 @@ export default {
             color.setY(intersects[0].face.c, hoverColor.g);
             color.setZ(intersects[0].face.c, hoverColor.b);
             color.needsUpdate = true;
-          }
+          },
         });
       }
 
@@ -287,7 +299,7 @@ export default {
 
     animate();
 
-    addEventListener("mousemove", event => {
+    addEventListener("mousemove", (event) => {
       mouse.x = (event.clientX / innerWidth) * 2 - 1;
       mouse.y = -(event.clientY / innerHeight) * 2 + 1;
     });
@@ -296,49 +308,54 @@ export default {
       opacity: 1,
       duration: 2,
       y: 0,
-      ease: "back"
+      ease: "back",
     });
     gsap.to("#pText", {
       opacity: 1,
       duration: 3,
       delay: 0.5,
       y: 0,
-      ease: "back"
+      ease: "back",
     });
     gsap.to("#animationButton", {
       opacity: 1,
       duration: 3,
       delay: 1,
       y: 0,
-      ease: "back"
+      ease: "back",
     });
 
-    document.querySelector("#animationButton").addEventListener("click", e => {
-      e.preventDefault();
-      gsap.to("#container", {
-        opacity: 0
+    document
+      .querySelector("#animationButton")
+      .addEventListener("click", (e) => {
+        e.preventDefault();
+        gsap.to("#container", {
+          opacity: 0,
+        });
+        gsap.to(camera.position, {
+          z: 5,
+          ease: "power3",
+          duration: 5,
+        });
+        gsap.to(camera.rotation, {
+          x: 1.57,
+          ease: "power2",
+          duration: 5,
+          delay: 0.5,
+        });
+        gsap.to(camera.position, {
+          y: 1000,
+          ease: "power3.in",
+          duration: 3,
+          delay: 2.5,
+          created() {
+            setTimeout(function() {
+              window.location.href =
+                "https://cute-valkyrie-578c72.netlify.app/";
+            }, 3000);
+          },
+        });
       });
-      gsap.to(camera.position, {
-        z: 5,
-        ease: "power3",
-        duration: 5
-      });
-      gsap.to(camera.rotation, {
-        x: 1.57,
-        ease: "power2",
-        duration: 5,
-        delay: 0.5
-      });
-      gsap.to(camera.position, {
-        y: 1000,
-        ease: "power3.in",
-        duration: 3,
-        delay: 2.5,
-        onComplete: () => {
-          this.$router.push("/http://10.0.0.26:8080/");
-        }
-      });
-    });
 
     addEventListener("resize", () => {
       camera.aspect = innerWidth / innerHeight;
@@ -346,7 +363,7 @@ export default {
 
       renderer.setSize(innerWidth, innerHeight);
     });
-  }
+  },
 };
 </script>
 
