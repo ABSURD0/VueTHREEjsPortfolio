@@ -350,8 +350,7 @@ export default {
           delay: 2.5,
           created() {
             setTimeout(function() {
-              window.location.href =
-                "https://cute-valkyrie-578c72.netlify.app/";
+              window.location.href = "https://eriksportfolio.netlify.app/";
             }, 3000);
           },
         });
